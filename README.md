@@ -18,3 +18,10 @@ A single Z layer can approximate 2 to 3 stacked vanilla layers.
 This also means it has lesser parameters and high information density.
 
 It is not guaranteed to work as its still under research. Feel free to share your results.
+
+# Examples
+|Dataset|Model|Parameters|Accuracy|Colab|
+|---|---|---|---|---|
+|MNIST|C16-SP-C32-SP-F-D-L|73,512|99.63|[link](https://colab.research.google.com/drive/13LLYz6L1S_R_WU1sj4JZHuPrK7lNezrv?usp=sharing)|
+|CIFAR-10|CD16-SP-DC32-SP-DC64-SP-F-D-L|   |   |[link](https://colab.research.google.com/drive/1rkTvvaqBI42IXPWOxIum_9Y3laJJSRlU?usp=sharing)|
+|   |   |   |   |   |
