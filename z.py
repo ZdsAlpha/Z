@@ -244,3 +244,88 @@ class StackedConv3d(StackedBase):
     def __init__(self, in_channels, mid_channels, out_channels, layers, kernel_size, stride=1, padding=0, dilation=1, groups=1, bias=True, padding_mode='zeros', activation=F.relu):
         super(StackedConv3d, self).__init__(lambda i, o, l: nn.Conv3d(i, o, kernel_size, stride, padding, dilation, groups, bias, padding_mode), in_channels, mid_channels, out_channels, layers, activation)
 
+
+class StackedConvTranspose1d(StackedBase):
+    def __init__(self, in_channels, mid_channels, out_channels, layers, kernel_size, stride=1, padding=0, output_padding=0, groups=1, bias=True, dilation=1, padding_mode='zeros', activation=F.relu):
+        super(StackedConvTranspose1d, self).__init__(lambda i, o, l: nn.ConvTranspose1d(i, o, kernel_size, stride, padding, output_padding, groups, bias, dilation, padding_mode), in_channels, mid_channels, out_channels, layers, activation)
+
+
+class StackedConvTranspose2d(StackedBase):
+    def __init__(self, in_channels, mid_channels, out_channels, layers, kernel_size, stride=1, padding=0, output_padding=0, groups=1, bias=True, dilation=1, padding_mode='zeros', activation=F.relu):
+        super(StackedConvTranspose2d, self).__init__(lambda i, o, l: nn.ConvTranspose2d(i, o, kernel_size, stride, padding, output_padding, groups, bias, dilation, padding_mode), in_channels, mid_channels, out_channels, layers, activation)
+
+
+class StackedConvTranspose3d(StackedBase):
+    def __init__(self, in_channels, mid_channels, out_channels, layers, kernel_size, stride=1, padding=0, output_padding=0, groups=1, bias=True, dilation=1, padding_mode='zeros', activation=F.relu):
+        super(StackedConvTranspose3d, self).__init__(lambda i, o, l: nn.ConvTranspose3d(i, o, kernel_size, stride, padding, output_padding, groups, bias, dilation, padding_mode), in_channels, mid_channels, out_channels, layers, activation)
+
+
+class ZStackedLinear(StackedBase):
+    def __init__(self, in_features, mid_features, out_features, routes, layers, bias=True, non_convex=True, activation=F.relu):
+        super(ZStackedLinear, self).__init__(lambda i, o, l: ZLinear(i, o, routes, bias, non_convex), in_features, mid_features, out_features, layers, activation)
+
+
+class ZStackedConv1d(StackedBase):
+    def __init__(self, in_channels, mid_channels, out_channels, routes, layers, kernel_size, stride=1, padding=0, dilation=1, groups=1, bias=True, padding_mode='zeros', non_convex=True, activation=F.relu):
+        super(ZStackedConv1d, self).__init__(lambda i, o, l: ZConv1d(i, o, routes, kernel_size, stride, padding, dilation, groups, bias, padding_mode, non_convex), in_channels, mid_channels, out_channels, layers, activation)
+
+
+class ZStackedConv2d(StackedBase):
+    def __init__(self, in_channels, mid_channels, out_channels, routes, layers, kernel_size, stride=1, padding=0, dilation=1, groups=1, bias=True, padding_mode='zeros', non_convex=True, activation=F.relu):
+        super(ZStackedConv2d, self).__init__(lambda i, o, l: ZConv2d(i, o, routes, kernel_size, stride, padding, dilation, groups, bias, padding_mode, non_convex), in_channels, mid_channels, out_channels, layers, activation)
+
+
+class ZStackedConv3d(StackedBase):
+    def __init__(self, in_channels, mid_channels, out_channels, routes, layers, kernel_size, stride=1, padding=0, dilation=1, groups=1, bias=True, padding_mode='zeros', non_convex=True, activation=F.relu):
+        super(ZStackedConv3d, self).__init__(lambda i, o, l: ZConv3d(i, o, routes, kernel_size, stride, padding, dilation, groups, bias, padding_mode, non_convex), in_channels, mid_channels, out_channels, layers, activation)
+
+
+class ZStackedConvTranspose1d(StackedBase):
+    def __init__(self, in_channels, mid_channels, out_channels, routes, layers, kernel_size, stride=1, padding=0, output_padding=0, groups=1, bias=True, dilation=1, padding_mode='zeros', non_convex=True, activation=F.relu):
+        super(ZStackedConvTranspose1d, self).__init__(lambda i, o, l: ZConvTranspose1d(i, o, routes, kernel_size, stride, padding, output_padding, groups, bias, dilation, padding_mode, non_convex), in_channels, mid_channels, out_channels, layers, activation)
+
+
+class ZStackedConvTranspose2d(StackedBase):
+    def __init__(self, in_channels, mid_channels, out_channels, routes, layers, kernel_size, stride=1, padding=0, output_padding=0, groups=1, bias=True, dilation=1, padding_mode='zeros', non_convex=True, activation=F.relu):
+        super(ZStackedConvTranspose2d, self).__init__(lambda i, o, l: ZConvTranspose2d(i, o, routes, kernel_size, stride, padding, output_padding, groups, bias, dilation, padding_mode, non_convex), in_channels, mid_channels, out_channels, layers, activation)
+
+
+class ZStackedConvTranspose3d(StackedBase):
+    def __init__(self, in_channels, mid_channels, out_channels, routes, layers, kernel_size, stride=1, padding=0, output_padding=0, groups=1, bias=True, dilation=1, padding_mode='zeros', non_convex=True, activation=F.relu):
+        super(ZStackedConvTranspose3d, self).__init__(lambda i, o, l: ZConvTranspose3d(i, o, routes, kernel_size, stride, padding, output_padding, groups, bias, dilation, padding_mode, non_convex), in_channels, mid_channels, out_channels, layers, activation)
+
+
+class DenseLinear(DenseBase):
+    def __init__(self, in_features, mid_features, out_features, layers, bias=True, activation=F.relu):
+        super(DenseLinear, self).__init__(lambda i, o, l: nn.Linear(i, o, bias=bias), in_features, mid_features, out_features, layers, activation)
+
+
+class DenseConv1d(DenseBase):
+    def __init__(self, in_channels, mid_channels, out_channels, layers, kernel_size, stride=1, padding=0, dilation=1, groups=1, bias=True, padding_mode='zeros', activation=F.relu):
+        super(DenseConv1d, self).__init__(lambda i, o, l: nn.Conv1d(i, o, kernel_size, stride, padding, dilation, groups, bias, padding_mode), in_channels, mid_channels, out_channels, layers, activation)
+
+
+class DenseConv2d(DenseBase):
+    def __init__(self, in_channels, mid_channels, out_channels, layers, kernel_size, stride=1, padding=0, dilation=1, groups=1, bias=True, padding_mode='zeros', activation=F.relu):
+        super(DenseConv2d, self).__init__(lambda i, o, l: nn.Conv2d(i, o, kernel_size, stride, padding, dilation, groups, bias, padding_mode), in_channels, mid_channels, out_channels, layers, activation)
+
+
+class DenseConv3d(DenseBase):
+    def __init__(self, in_channels, mid_channels, out_channels, layers, kernel_size, stride=1, padding=0, dilation=1, groups=1, bias=True, padding_mode='zeros', activation=F.relu):
+        super(DenseConv3d, self).__init__(lambda i, o, l: nn.Conv3d(i, o, kernel_size, stride, padding, dilation, groups, bias, padding_mode), in_channels, mid_channels, out_channels, layers, activation)
+
+
+class DenseConvTranspose1d(DenseBase):
+    def __init__(self, in_channels, mid_channels, out_channels, layers, kernel_size, stride=1, padding=0, output_padding=0, groups=1, bias=True, dilation=1, padding_mode='zeros', activation=F.relu):
+        super(DenseConvTranspose1d, self).__init__(lambda i, o, l: nn.ConvTranspose1d(i, o, kernel_size, stride, padding, output_padding, groups, bias, dilation, padding_mode), in_channels, mid_channels, out_channels, layers, activation)
+
+
+class DenseConvTranspose2d(DenseBase):
+    def __init__(self, in_channels, mid_channels, out_channels, layers, kernel_size, stride=1, padding=0, output_padding=0, groups=1, bias=True, dilation=1, padding_mode='zeros', activation=F.relu):
+        super(DenseConvTranspose2d, self).__init__(lambda i, o, l: nn.ConvTranspose2d(i, o, kernel_size, stride, padding, output_padding, groups, bias, dilation, padding_mode), in_channels, mid_channels, out_channels, layers, activation)
+
+
+class DenseConvTranspose3d(DenseBase):
+    def __init__(self, in_channels, mid_channels, out_channels, layers, kernel_size, stride=1, padding=0, output_padding=0, groups=1, bias=True, dilation=1, padding_mode='zeros', activation=F.relu):
+        super(DenseConvTranspose3d, self).__init__(lambda i, o, l: nn.ConvTranspose3d(i, o, kernel_size, stride, padding, output_padding, groups, bias, dilation, padding_mode), in_channels, mid_channels, out_channels, layers, activation)
+
