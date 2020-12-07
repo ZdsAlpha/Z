@@ -316,37 +316,37 @@ class StackedConvTranspose3d(StackedBase):
 
 
 class ZStackedLinear(StackedBase):
-    def __init__(self, in_features, mid_features, out_features, routes, layers, bias=True, non_convex=True, activation=F.relu):
+    def __init__(self, in_features, mid_features, out_features, routes, layers, bias=True, non_convex=True, activation=None):
         super(ZStackedLinear, self).__init__(lambda i, o, l: ZLinear(i, o, routes, bias, non_convex), in_features, mid_features, out_features, layers, activation)
 
 
 class ZStackedConv1d(StackedBase):
-    def __init__(self, in_channels, mid_channels, out_channels, routes, layers, kernel_size, stride=1, padding=0, dilation=1, groups=1, bias=True, padding_mode='zeros', non_convex=True, activation=F.relu):
+    def __init__(self, in_channels, mid_channels, out_channels, routes, layers, kernel_size, stride=1, padding=0, dilation=1, groups=1, bias=True, padding_mode='zeros', non_convex=True, activation=None):
         super(ZStackedConv1d, self).__init__(lambda i, o, l: ZConv1d(i, o, routes, kernel_size, stride, padding, dilation, groups, bias, padding_mode, non_convex), in_channels, mid_channels, out_channels, layers, activation)
 
 
 class ZStackedConv2d(StackedBase):
-    def __init__(self, in_channels, mid_channels, out_channels, routes, layers, kernel_size, stride=1, padding=0, dilation=1, groups=1, bias=True, padding_mode='zeros', non_convex=True, activation=F.relu):
+    def __init__(self, in_channels, mid_channels, out_channels, routes, layers, kernel_size, stride=1, padding=0, dilation=1, groups=1, bias=True, padding_mode='zeros', non_convex=True, activation=None):
         super(ZStackedConv2d, self).__init__(lambda i, o, l: ZConv2d(i, o, routes, kernel_size, stride, padding, dilation, groups, bias, padding_mode, non_convex), in_channels, mid_channels, out_channels, layers, activation)
 
 
 class ZStackedConv3d(StackedBase):
-    def __init__(self, in_channels, mid_channels, out_channels, routes, layers, kernel_size, stride=1, padding=0, dilation=1, groups=1, bias=True, padding_mode='zeros', non_convex=True, activation=F.relu):
+    def __init__(self, in_channels, mid_channels, out_channels, routes, layers, kernel_size, stride=1, padding=0, dilation=1, groups=1, bias=True, padding_mode='zeros', non_convex=True, activation=None):
         super(ZStackedConv3d, self).__init__(lambda i, o, l: ZConv3d(i, o, routes, kernel_size, stride, padding, dilation, groups, bias, padding_mode, non_convex), in_channels, mid_channels, out_channels, layers, activation)
 
 
 class ZStackedConvTranspose1d(StackedBase):
-    def __init__(self, in_channels, mid_channels, out_channels, routes, layers, kernel_size, stride=1, padding=0, output_padding=0, groups=1, bias=True, dilation=1, padding_mode='zeros', non_convex=True, activation=F.relu):
+    def __init__(self, in_channels, mid_channels, out_channels, routes, layers, kernel_size, stride=1, padding=0, output_padding=0, groups=1, bias=True, dilation=1, padding_mode='zeros', non_convex=True, activation=None):
         super(ZStackedConvTranspose1d, self).__init__(lambda i, o, l: ZConvTranspose1d(i, o, routes, kernel_size, stride, padding, output_padding, groups, bias, dilation, padding_mode, non_convex), in_channels, mid_channels, out_channels, layers, activation)
 
 
 class ZStackedConvTranspose2d(StackedBase):
-    def __init__(self, in_channels, mid_channels, out_channels, routes, layers, kernel_size, stride=1, padding=0, output_padding=0, groups=1, bias=True, dilation=1, padding_mode='zeros', non_convex=True, activation=F.relu):
+    def __init__(self, in_channels, mid_channels, out_channels, routes, layers, kernel_size, stride=1, padding=0, output_padding=0, groups=1, bias=True, dilation=1, padding_mode='zeros', non_convex=True, activation=None):
         super(ZStackedConvTranspose2d, self).__init__(lambda i, o, l: ZConvTranspose2d(i, o, routes, kernel_size, stride, padding, output_padding, groups, bias, dilation, padding_mode, non_convex), in_channels, mid_channels, out_channels, layers, activation)
 
 
 class ZStackedConvTranspose3d(StackedBase):
-    def __init__(self, in_channels, mid_channels, out_channels, routes, layers, kernel_size, stride=1, padding=0, output_padding=0, groups=1, bias=True, dilation=1, padding_mode='zeros', non_convex=True, activation=F.relu):
+    def __init__(self, in_channels, mid_channels, out_channels, routes, layers, kernel_size, stride=1, padding=0, output_padding=0, groups=1, bias=True, dilation=1, padding_mode='zeros', non_convex=True, activation=None):
         super(ZStackedConvTranspose3d, self).__init__(lambda i, o, l: ZConvTranspose3d(i, o, routes, kernel_size, stride, padding, output_padding, groups, bias, dilation, padding_mode, non_convex), in_channels, mid_channels, out_channels, layers, activation)
 
 
@@ -386,37 +386,37 @@ class DenseConvTranspose3d(DenseBase):
 
 
 class ZStackedLinear(StackedBase):
-    def __init__(self, in_features, mid_features, out_features, routes, layers, bias=True, non_convex=True, activation=F.relu):
+    def __init__(self, in_features, mid_features, out_features, routes, layers, bias=True, non_convex=True, activation=None):
         super(ZStackedLinear, self).__init__(lambda i, o, l: ZLinear(i, o, routes, bias, non_convex), in_features, mid_features, out_features, layers, activation)
 
 
 class ZDenseConv1d(DenseBase):
-    def __init__(self, in_channels, mid_channels, out_channels, routes, layers, kernel_size, stride=1, padding=0, dilation=1, groups=1, bias=True, padding_mode='zeros', non_convex=True, activation=F.relu):
+    def __init__(self, in_channels, mid_channels, out_channels, routes, layers, kernel_size, stride=1, padding=0, dilation=1, groups=1, bias=True, padding_mode='zeros', non_convex=True, activation=None):
         super(ZDenseConv1d, self).__init__(lambda i, o, l: ZConv1d(i, o, routes, kernel_size, stride, padding, dilation, groups, bias, padding_mode, non_convex), in_channels, mid_channels, out_channels, layers, activation)
 
 
 class ZDenseConv2d(DenseBase):
-    def __init__(self, in_channels, mid_channels, out_channels, routes, layers, kernel_size, stride=1, padding=0, dilation=1, groups=1, bias=True, padding_mode='zeros', non_convex=True, activation=F.relu):
+    def __init__(self, in_channels, mid_channels, out_channels, routes, layers, kernel_size, stride=1, padding=0, dilation=1, groups=1, bias=True, padding_mode='zeros', non_convex=True, activation=None):
         super(ZDenseConv2d, self).__init__(lambda i, o, l: ZConv2d(i, o, routes, kernel_size, stride, padding, dilation, groups, bias, padding_mode, non_convex), in_channels, mid_channels, out_channels, layers, activation)
 
 
 class ZDenseConv3d(DenseBase):
-    def __init__(self, in_channels, mid_channels, out_channels, routes, layers, kernel_size, stride=1, padding=0, dilation=1, groups=1, bias=True, padding_mode='zeros', non_convex=True, activation=F.relu):
+    def __init__(self, in_channels, mid_channels, out_channels, routes, layers, kernel_size, stride=1, padding=0, dilation=1, groups=1, bias=True, padding_mode='zeros', non_convex=True, activation=None):
         super(ZDenseConv3d, self).__init__(lambda i, o, l: ZConv3d(i, o, routes, kernel_size, stride, padding, dilation, groups, bias, padding_mode, non_convex), in_channels, mid_channels, out_channels, layers, activation)
 
 
 class ZDenseConvTranspose1d(DenseBase):
-    def __init__(self, in_channels, mid_channels, out_channels, routes, layers, kernel_size, stride=1, padding=0, output_padding=0, groups=1, bias=True, dilation=1, padding_mode='zeros', non_convex=True, activation=F.relu):
+    def __init__(self, in_channels, mid_channels, out_channels, routes, layers, kernel_size, stride=1, padding=0, output_padding=0, groups=1, bias=True, dilation=1, padding_mode='zeros', non_convex=True, activation=None):
         super(ZDenseConvTranspose1d, self).__init__(lambda i, o, l: ZConvTranspose1d(i, o, routes, kernel_size, stride, padding, output_padding, groups, bias, dilation, padding_mode, non_convex), in_channels, mid_channels, out_channels, layers, activation)
 
 
 class ZDenseConvTranspose2d(DenseBase):
-    def __init__(self, in_channels, mid_channels, out_channels, routes, layers, kernel_size, stride=1, padding=0, output_padding=0, groups=1, bias=True, dilation=1, padding_mode='zeros', non_convex=True, activation=F.relu):
+    def __init__(self, in_channels, mid_channels, out_channels, routes, layers, kernel_size, stride=1, padding=0, output_padding=0, groups=1, bias=True, dilation=1, padding_mode='zeros', non_convex=True, activation=None):
         super(ZDenseConvTranspose2d, self).__init__(lambda i, o, l: ZConvTranspose2d(i, o, routes, kernel_size, stride, padding, output_padding, groups, bias, dilation, padding_mode, non_convex), in_channels, mid_channels, out_channels, layers, activation)
 
 
 class ZDenseConvTranspose3d(DenseBase):
-    def __init__(self, in_channels, mid_channels, out_channels, routes, layers, kernel_size, stride=1, padding=0, output_padding=0, groups=1, bias=True, dilation=1, padding_mode='zeros', non_convex=True, activation=F.relu):
+    def __init__(self, in_channels, mid_channels, out_channels, routes, layers, kernel_size, stride=1, padding=0, output_padding=0, groups=1, bias=True, dilation=1, padding_mode='zeros', non_convex=True, activation=None):
         super(ZDenseConvTranspose3d, self).__init__(lambda i, o, l: ZConvTranspose3d(i, o, routes, kernel_size, stride, padding, output_padding, groups, bias, dilation, padding_mode, non_convex), in_channels, mid_channels, out_channels, layers, activation)
 
 
@@ -449,7 +449,7 @@ class UNet2d(UBase):
 
 class ZUNet2d(UBase):
     def __init__(self, in_channels, out_channels, routes, filters=[64, 128], layers=2, kernel_size=3,
-                 down_factor=2, activation=F.relu):
+                 down_factor=2, activation=None):
         self.kernel_size = kernel_size
         self.down_factor = down_factor
         self.routes = routes
@@ -462,7 +462,62 @@ class ZUNet2d(UBase):
                              padding=self.kernel_size // 2, activation=self.activation)
 
     def decoder_initializer(self, in_channels, mid_channels, out_channels, id):
-        return StackedConvTranspose2d(in_channels, mid_channels, out_channels, self.routes, self.layers[id - 1], self.kernel_size,
+        return ZStackedConvTranspose2d(in_channels, mid_channels, out_channels, self.routes, self.layers[id - 1], self.kernel_size,
+                                      padding=self.kernel_size // 2, activation=self.activation)
+
+    def downsampler_initializer(self, filter, id):
+        return ZConv2d(filter, filter, self.routes, kernel_size=self.down_factor, stride=self.down_factor)
+
+    def upsampler_initializer(self, filter, id):
+        return ZConvTranspose2d(filter, filter, self.routes, kernel_size=self.down_factor, stride=self.down_factor)
+
+    def shape_adjustment(self, x, shape):
+        return Pad.pad(x, shape[-1], shape[-2])
+
+
+class DenseUNet2d(UBase):
+    def __init__(self, in_channels, out_channels, filters=[64, 128], layers=2, kernel_size=3,
+                 down_factor=2, activation=F.relu):
+        self.kernel_size = kernel_size
+        self.down_factor = down_factor
+        super(DenseUNet2d, self).__init__(self.encoder_initializer, self.decoder_initializer,
+                                     self.downsampler_initializer, self.upsampler_initializer, self.shape_adjustment,
+                                     in_channels, out_channels, filters, layers, activation)
+
+    def encoder_initializer(self, in_channels, mid_channels, out_channels, id):
+        return DenseConv2d(in_channels, mid_channels, out_channels, self.layers[id - 1], self.kernel_size,
+                             padding=self.kernel_size // 2, activation=self.activation)
+
+    def decoder_initializer(self, in_channels, mid_channels, out_channels, id):
+        return DenseConvTranspose2d(in_channels, mid_channels, out_channels, self.layers[id - 1], self.kernel_size,
+                                      padding=self.kernel_size // 2, activation=self.activation)
+
+    def downsampler_initializer(self, filter, id):
+        return nn.Conv2d(filter, filter, kernel_size=self.down_factor, stride=self.down_factor)
+
+    def upsampler_initializer(self, filter, id):
+        return nn.ConvTranspose2d(filter, filter, kernel_size=self.down_factor, stride=self.down_factor)
+
+    def shape_adjustment(self, x, shape):
+        return Pad.pad(x, shape[-1], shape[-2])
+
+
+class ZDenseUNet2d(UBase):
+    def __init__(self, in_channels, out_channels, routes, filters=[64, 128], layers=2, kernel_size=3,
+                 down_factor=2, activation=None):
+        self.kernel_size = kernel_size
+        self.down_factor = down_factor
+        self.routes = routes
+        super(ZDenseUNet2d, self).__init__(self.encoder_initializer, self.decoder_initializer,
+                                     self.downsampler_initializer, self.upsampler_initializer, self.shape_adjustment,
+                                     in_channels, out_channels, filters, layers, activation)
+
+    def encoder_initializer(self, in_channels, mid_channels, out_channels, id):
+        return ZDenseConv2d(in_channels, mid_channels, out_channels, self.routes, self.layers[id - 1], self.kernel_size,
+                             padding=self.kernel_size // 2, activation=self.activation)
+
+    def decoder_initializer(self, in_channels, mid_channels, out_channels, id):
+        return ZDenseConvTranspose2d(in_channels, mid_channels, out_channels, self.routes, self.layers[id - 1], self.kernel_size,
                                       padding=self.kernel_size // 2, activation=self.activation)
 
     def downsampler_initializer(self, filter, id):
