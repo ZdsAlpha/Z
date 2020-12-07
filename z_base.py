@@ -177,16 +177,16 @@ class UBase(nn.Module):
         tensors = []
         shapes = []
         for i, encoder in enumerate(self.encoders):
-            x = self.activation(encoder(x))
+            x = encoder(x) if self.activation is None else self.activation(encoder(x))
             tensors.append(x)
             shapes.append(x.shape)
-            x = self.activation(self.dsampler[i](x))
+            x = self.dsampler[i](x) if self.activation is None else self.activation(self.dsampler[i](x))
         for i, decoder in enumerate(self.decoders):
             shape = shapes.pop()
-            x = self.activation(self.usampler[i](x))
+            x = self.usampler[i](x) if self.activation is None else self.activation(self.usampler[i](x))
             x = self.shape_adjustment(x, shape)
             x = torch.cat([tensors.pop(), x], dim=1)
-            if i == len(self.decoders) - 1:
+            if self.activation is None or i == len(self.decoders) - 1:
                 x = decoder(x)
             else:
                 x = self.activation(decoder(x))
