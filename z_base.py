@@ -138,6 +138,61 @@ class DenseBase(nn.Module):
         return self.out_layer(x)
 
 
+class UBase(nn.Module):
+    def __init__(self, encoder_initializer, decoder_initializer, downsampler_initializer, upsampler_initializer, shape_adjustment,
+                 in_channels, out_channels, filters, layers, activation=F.relu):
+        super(UBase, self).__init__()
+        assert len(filters) >= 1
+        if type(layers) is int:
+            layers = [layers] * len(filters)
+        for layer in layers:
+            assert layer >= 2
+        self.encoder_initializer = encoder_initializer
+        self.decoder_initializer = decoder_initializer
+        self.downsampler_initializer = downsampler_initializer
+        self.upsampler_initializer = upsampler_initializer
+        self.shape_adjustment = shape_adjustment
+        self.in_channels = in_channels
+        self.out_channels = out_channels
+        self.filters = filters
+        self.layers = layers
+        self.activation = activation
+        encoders = []
+        decoders = []
+        dsamplers = []
+        usamplers = []
+        for i, filter in enumerate(filters):
+            encoders = encoders + [encoder_initializer(in_channels, filter, filter, i + 1)]
+            decoders = [decoder_initializer(2 * filter, filter, out_channels, i + 1)] + decoders
+            dsamplers = dsamplers + [downsampler_initializer(filter, i + 1) if downsampler_initializer is not None else None]
+            usamplers = [upsampler_initializer(filter, i + 1) if upsampler_initializer is not None else None] + usamplers
+            in_channels = filter
+            out_channels = filter
+        self.encoders = nn.Sequential(*encoders)
+        self.decoders = nn.Sequential(*decoders)
+        self.dsampler = nn.Sequential(*dsamplers)
+        self.usampler = nn.Sequential(*usamplers)
+
+    def forward(self, x):
+        tensors = []
+        shapes = []
+        for i, encoder in enumerate(self.encoders):
+            x = self.activation(encoder(x))
+            tensors.append(x)
+            shapes.append(x.shape)
+            x = self.activation(self.dsampler[i](x))
+        for i, decoder in enumerate(self.decoders):
+            shape = shapes.pop()
+            x = self.activation(self.usampler[i](x))
+            x = self.shape_adjustment(x, shape)
+            x = torch.cat([tensors.pop(), x], dim=1)
+            if i == len(self.decoders) - 1:
+                x = decoder(x)
+            else:
+                x = self.activation(decoder(x))
+        return x
+
+
 class Pad(nn.Module):
     def __init__(self, width, height, mode="constant", value=0):
         super(Pad, self).__init__()

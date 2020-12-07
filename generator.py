@@ -79,4 +79,12 @@ if __name__ == "__main__":
         f.write(create_class("ZDenseConvTranspose{0}d".format(dim), "DenseBase",
                              "in_channels, mid_channels, out_channels, routes, layers, kernel_size, stride=1, padding=0, output_padding=0, groups=1, bias=True, dilation=1, padding_mode='zeros', non_convex=True, activation=F.relu",
                              "lambda i, o, l: ZConvTranspose{0}d(i, o, routes, kernel_size, stride, padding, output_padding, groups, bias, dilation, padding_mode, non_convex), in_channels, mid_channels, out_channels, layers, activation".format(dim)))
+
+    # Patching
+    for file in ["unet.py"]:
+        stream = open(file, "r", encoding="utf-8")
+        lines = stream.read().split("\n")
+        f.write("\n".join(lines[2:]))
+        stream.close()
+
     f.close()
