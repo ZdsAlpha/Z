@@ -1,3 +1,5 @@
+(Note: This description is obsolete. There are major changes in core architecture. But overall idea is same. I will update description.)
+
 # Z Layers
 Z Layers are alternative layers to vanilla layers.
 Unlike vanilla layers, Z layers can perform non-linear transformations.

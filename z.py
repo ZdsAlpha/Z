@@ -15,16 +15,16 @@ class ZBase(nn.Module):
         self.out_features = out_features
         self.routes = routes
         self.dims = dims
-        self.layer = layer_initializer(in_features, out_features * routes)
+        self.a = layer_initializer(in_features, out_features * routes)
+        self.l = layer_initializer(in_features, out_features * routes)
         self.z = nn.Parameter(torch.zeros(*tuple([1, out_features, routes if non_convex else 1] + [1] * dims)).normal_(0, 1),
                               requires_grad=True)
 
     def forward(self, *x):
-        x = self.layer(*x)
-        shape = list(x.shape)
-        shape[1] = self.out_features
-        shape.insert(2, self.routes)
-        return softmax(x.view(*shape), self.z, dim=2)
+        a = self.a(*x)
+        l = self.l(*x)
+        shape = (a.shape[0], self.out_features, self.routes, *a.shape[2:])
+        return torch.sum(a.view(*shape) * torch.softmax(self.z * l.view(*shape), dim=2), dim=2)
 
 
 class StackedBase(nn.Module):
