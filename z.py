@@ -385,9 +385,9 @@ class DenseConvTranspose3d(DenseBase):
         super(DenseConvTranspose3d, self).__init__(lambda i, o, l: nn.ConvTranspose3d(i, o, kernel_size, stride, padding, output_padding, groups, bias, dilation, padding_mode), in_channels, mid_channels, out_channels, layers, activation)
 
 
-class ZStackedLinear(StackedBase):
+class ZDenseLinear(DenseBase):
     def __init__(self, in_features, mid_features, out_features, routes, layers, bias=True, non_convex=True, activation=None):
-        super(ZStackedLinear, self).__init__(lambda i, o, l: ZLinear(i, o, routes, bias, non_convex), in_features, mid_features, out_features, layers, activation)
+        super(ZDenseLinear, self).__init__(lambda i, o, l: ZLinear(i, o, routes, bias, non_convex), in_features, mid_features, out_features, layers, activation)
 
 
 class ZDenseConv1d(DenseBase):

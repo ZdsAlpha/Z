@@ -68,7 +68,7 @@ if __name__ == "__main__":
                              "in_channels, mid_channels, out_channels, layers, kernel_size, stride=1, padding=0, output_padding=0, groups=1, bias=True, dilation=1, padding_mode='zeros', activation=F.relu",
                              "lambda i, o, l: nn.ConvTranspose{0}d(i, o, kernel_size, stride, padding, output_padding, groups, bias, dilation, padding_mode), in_channels, mid_channels, out_channels, layers, activation".format(dim)))
     # DenseBase + ZBase
-    f.write(create_class("ZStackedLinear", "StackedBase",
+    f.write(create_class("ZDenseLinear", "DenseBase",
                          "in_features, mid_features, out_features, routes, layers, bias=True, non_convex=True, activation=None",
                          "lambda i, o, l: ZLinear(i, o, routes, bias, non_convex), in_features, mid_features, out_features, layers, activation"))
     for dim in range(1, 4):
