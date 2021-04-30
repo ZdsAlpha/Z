@@ -8,23 +8,37 @@ def softmax(x, hardness=1, dim=0):
 
 
 class ZBase(nn.Module):
-    def __init__(self, layer_initializer, in_features, out_features, routes, dims=0, non_convex=True):
+    def __init__(self, layer_initializer, in_features, out_features, routes, dims=0, share_weights=True, non_convex=True):
         super(ZBase, self).__init__()
         self.layer_initializer = layer_initializer
         self.in_features = in_features
         self.out_features = out_features
         self.routes = routes
         self.dims = dims
-        self.a = layer_initializer(in_features, out_features * routes)
-        self.l = layer_initializer(in_features, out_features * routes)
-        self.z = nn.Parameter(torch.zeros(*tuple([1, out_features, routes if non_convex else 1] + [1] * dims)).normal_(0, 1),
-                              requires_grad=True)
+        self.share_weights = share_weights
+        self.non_convex = non_convex
+        if share_weights:
+            self.layer = layer_initializer(in_features, out_features * routes)
+        else:
+            self.a = layer_initializer(in_features, out_features * routes)
+            self.l = layer_initializer(in_features, out_features * routes)
+        self.z = nn.Parameter(torch.zeros(*[out_features, routes if non_convex else 1]).normal_(0, 1), requires_grad=True)
 
     def forward(self, *x):
-        a = self.a(*x)
-        l = self.l(*x)
-        shape = (a.shape[0], self.out_features, self.routes, *a.shape[2:])
-        return torch.sum(a.view(*shape) * torch.softmax(self.z * l.view(*shape), dim=2), dim=2)
+        if self.share_weights:
+            _x = self.layer(*x)
+            a, l = _x, _x
+        else:
+            a = self.a(*x)
+            l = self.l(*x)
+        if self.dims == 0:
+            shape = (*a.shape[:-1], self.out_features, self.routes)
+            z_shape = (*([1] * len(a.shape[:-1])), self.out_features, -1)
+        else:
+            shape = (a.shape[0], self.out_features, self.routes, *a.shape[2:])
+            z_shape = (1, self.out_features, -1, *([1] * len(a.shape[2:])))
+        dim = -1 if self.dims == 0 else 2
+        return torch.sum(a.view(*shape) * torch.softmax(self.z.view(*z_shape) * l.view(*shape), dim=dim), dim=dim)
 
 
 class StackedBase(nn.Module):
